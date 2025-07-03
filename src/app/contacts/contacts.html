@@ -1,0 +1,128 @@
+<div class="contacts-container">
+  <!-- Header -->
+  <div class="contacts-header">
+    <div class="header-left">
+      <h1 class="page-title">Contacts</h1>
+      <p class="page-subtitle">
+        Manage person and organizations for all properties
+      </p>
+    </div>
+    <div class="header-actions">
+      <button mat-stroked-button class="action-btn">
+        <mat-icon>filter_list</mat-icon>
+        Filter
+      </button>
+      <button mat-stroked-button class="action-btn">
+        <mat-icon>file_download</mat-icon>
+        Import
+      </button>
+      <button mat-stroked-button class="action-btn">
+        <mat-icon>file_upload</mat-icon>
+        Export
+      </button>
+      <button mat-raised-button color="primary" class="add-contact-btn">
+        <mat-icon>add</mat-icon>
+        Add Contact
+      </button>
+    </div>
+  </div>
+
+  <!-- Search and Tabs -->
+  <div class="search-tabs-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <input
+        matInput
+        placeholder="Search contacts..."
+        (keyup)="applyFilter($event)"
+        #searchInput
+      />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-tab-group class="contacts-tabs" (selectedTabChange)="onTabChange($event.index)">
+      <mat-tab label="persons"></mat-tab>
+      <mat-tab label="organizations"></mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <!-- Contacts Table -->
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" class="contacts-table" matSort>
+      <!-- Avatar and Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name">
+          Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let contact" class="contact-cell">
+          <div class="contact-info">
+            <div class="contact-avatar">
+              <mat-icon>account_circle</mat-icon>
+            </div>
+            <div class="contact-details">
+              <div class="contact-name">{{contact.name}}</div>
+              <div class="contact-email">{{contact.email}}</div>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Project Column -->
+      <ng-container matColumnDef="project">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="project"
+          >Project</mat-header-cell
+        >
+        <mat-cell *matCellDef="let contact">{{contact.project}}</mat-cell>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+        <mat-cell *matCellDef="let contact">
+          <a href="tel:{{contact.phone}}" class="phone-link"
+            >{{contact.phone}}</a
+          >
+        </mat-cell>
+      </ng-container>
+
+      <!-- organization Column -->
+      @if(selectedTab == 0) {
+        <ng-container matColumnDef="organization">
+          <mat-header-cell *matHeaderCellDef mat-sort-header="organization"
+            >Organization</mat-header-cell
+          >
+          <mat-cell *matCellDef="let contact">{{contact.organization}}</mat-cell>
+        </ng-container>
+      }
+
+      <!-- Last Seen Column -->
+      <ng-container matColumnDef="lastSeen">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="lastSeen"
+          >Last Seen</mat-header-cell
+        >
+        <mat-cell *matCellDef="let contact">
+          <span class="last-contact">{{contact.lastSeen}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let contact">
+          <button class="mat-icon-button" style="margin-right: 10px">
+            <mat-icon color="primary">edit</mat-icon>
+          </button>
+          <button class="delete-action mat-icon-button">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        class="table-row"
+        (click)="selectContact(row)"
+      ></mat-row>
+    </mat-table>
+  </div>
+</div>

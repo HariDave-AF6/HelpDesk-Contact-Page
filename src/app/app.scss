@@ -1,0 +1,23 @@
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.content-area {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+  background-color: var(--background-color);
+}
+
+// .mat-drawer-container {
+//   height: 100%;
+// }
