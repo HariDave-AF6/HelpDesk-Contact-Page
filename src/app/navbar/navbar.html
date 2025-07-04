@@ -8,7 +8,7 @@
     </button>
   </div>
 
-  <div style="display: flex; gap: 2rem; justify-content: space-between;">
+  <div class="navbar-right-section">
     <mat-form-field appearance="outline" class="project-dropdown" style="margin-top: 20px;">
       <mat-label>Select Project</mat-label>
       <mat-select [(ngModel)]="selectedProject" (selectionChange)="onProjectChange()">
@@ -19,26 +19,30 @@
       </mat-select>
     </mat-form-field>
 
-    <div style="display: flex; gap: 2rem;">
-      <div class="navbar-center">
+    <div class="navbar-right-section-left">
+      @if(!isMobile) {
         <mat-form-field appearance="outline" class="search-field">
           <input matInput placeholder="Search chats, tickets, contacts..."
-                 [(ngModel)]="searchQuery">
+                  [(ngModel)]="searchQuery">
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-      </div>
-
-      <div class="navbar-right">
+      } @else {
         <button class="nav-icon-button">
-          <mat-icon [matBadge]="chatCount" matBadgeColor="warn"
-                    [matBadgeHidden]="chatCount === 0">chat</mat-icon>
+          <mat-icon>search</mat-icon>
         </button>
+      }
+    </div>
 
-        <button class="nav-icon-button">
-          <mat-icon [matBadge]="notificationCount" matBadgeColor="warn"
-                    [matBadgeHidden]="notificationCount === 0">notifications</mat-icon>
-        </button>
-      </div>
+    <div class="navbar-right">
+      <button class="nav-icon-button">
+        <mat-icon [matBadge]="chatCount" matBadgeColor="warn"
+                  [matBadgeHidden]="chatCount === 0">chat</mat-icon>
+      </button>
+
+      <button class="nav-icon-button">
+        <mat-icon [matBadge]="notificationCount" matBadgeColor="warn"
+                  [matBadgeHidden]="notificationCount === 0">notifications</mat-icon>
+      </button>
     </div>
   </div>
 </mat-toolbar>

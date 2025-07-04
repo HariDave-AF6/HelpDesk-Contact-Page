@@ -1,7 +1,9 @@
 <div class="app-container">
   <app-navbar (toggleSidebar)="drawer.toggle()" (projectChanged)="onProjectChanged($event)"></app-navbar>
+  <!-- <button (click)="switchTheme('theme-default')">Default Theme</button>
+  <button (click)="switchTheme('theme-green')">Green Theme</button> -->
   <mat-drawer-container style="height: 100%;">
-    <mat-drawer #drawer mode="side" opened>
+    <mat-drawer #drawer [mode]="mode">
       <app-sidebar [selectedProject]="selectedProject"></app-sidebar>
     </mat-drawer>
 

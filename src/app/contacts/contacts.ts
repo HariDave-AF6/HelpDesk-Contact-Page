@@ -4,9 +4,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 export interface Person {
   id: number;
@@ -30,8 +30,7 @@ export interface Organization {
 
 @Component({
   selector: 'app-contacts',
-  imports: [MatIcon, MatButton, MatTableModule, MatFormFieldModule, MatInputModule,
-    MatTab, MatTabGroup],
+  imports: [MatIcon, MatButton, MatTableModule, MatFormFieldModule, MatInputModule, MatTabsModule, MatPaginator, MatSortModule],
   templateUrl: './contacts.html',
   styleUrl: './contacts.scss'
 })

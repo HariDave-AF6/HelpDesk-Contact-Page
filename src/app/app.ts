@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, ViewChild, viewChild } from '@angular/core';
 import { Sidebar } from './sidebar/sidebar';
 import { Navbar } from './navbar/navbar';
 import { Contacts } from './contacts/contacts';
 import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
+import { ThemeService } from './services/theme-service';
 
 @Component({
   selector: 'app-root',
@@ -13,10 +14,39 @@ import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/materi
 
 export class App {
   protected title = 'contacts';
-
   selectedProject: string = 'all';
+  @ViewChild('drawer') drawer!: MatDrawer;
+  isMobile: boolean = false;
+  mode: 'side' | 'over' = 'side';
+
+  constructor(private themeService: ThemeService) {}
+
+  switchTheme(theme: 'theme-default' | 'theme-green') {
+    this.themeService.setTheme(theme);
+  }
 
   onProjectChanged(project: string) {
     this.selectedProject = project;
+  }
+
+  ngAfterViewInit() {
+    this.checkScreen();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkScreen();
+  }
+
+  checkScreen() {
+    this.isMobile = window.innerWidth <= 992;
+
+    if (this.isMobile) {
+      this.drawer?.close();
+      this.mode = 'over';
+    } else {
+      this.drawer?.open();
+      this.mode = 'side';
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatOptionModule } from '@angular/material/core';
@@ -19,9 +19,19 @@ export class Navbar {
   notificationCount: number = 3;
   chatCount: number = 2;
   selectedProject: string = 'all';
+  isMobile: boolean = false;
 
   @Output() toggleSidebar = new EventEmitter<void>();
   @Output() projectChanged = new EventEmitter<string>();
+
+  constructor() {
+    this.checkScreen();
+  }
+
+  @HostListener('window:resize')
+  checkScreen() {
+    this.isMobile = window.innerWidth <= 992;
+  }
 
   onProjectChange() {
     this.projectChanged.emit(this.selectedProject);

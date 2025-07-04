@@ -17,7 +17,7 @@
   .page-title {
     font-size: 32px;
     font-weight: 600;
-    color: var(--text-primary);
+    color: var(--primary-color);
     margin: 0 0 8px 0;
     line-height: 1.2;
   }
@@ -89,8 +89,8 @@
 
 .contacts-tabs {
   flex-shrink: 0;
-  width: 30%;
-  margin: 0 0 20px auto;
+  min-width: 35%;
+  margin: 0 0 22px auto;
 }
 
 .search-field {
@@ -120,7 +120,6 @@
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--border-color);
-  overflow-x: auto;
 }
 
 // Contact Cell
@@ -137,6 +136,7 @@
       width: 40px;
       height: 40px;
       color: var(--primary-color);
+      margin-top: 5px;
     }
   }
 
@@ -187,23 +187,9 @@
       flex-wrap: wrap;
     }
   }
-
-  .search-tabs-section {
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
-
-    .search-field {
-      max-width: 100%;
-    }
-  }
 }
 
 @media (max-width: 768px) {
-  .contacts-container {
-    padding: 16px;
-  }
-
   .header-left .page-title {
     font-size: 24px;
   }
@@ -219,18 +205,101 @@
     }
   }
 
-  // Hide some columns on mobile
-  .contacts-table {
-    ::ng-deep .mat-column-company,
-    ::ng-deep .mat-column-chats {
-      display: none;
-    }
-  }
-
   .contacts-tabs {
     ::ng-deep .mat-tab-label {
       padding: 12px 16px;
       font-size: 13px;
     }
   }
+}
+
+@media (max-width: 576px) {
+  .search-tabs-section {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+
+    .search-field {
+      max-width: 100%;
+    }
+  }
+
+  .contacts-tabs {
+    flex-shrink: 0;
+    width: 100%;
+    margin: 0 0 20px auto;
+  }
+}
+
+.tab-label {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+// Search & Select Customization
+:host ::ng-deep .search-field .mdc-text-field--outlined .mat-mdc-form-field-infix,
+:host ::ng-deep .search-field .mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+:host ::ng-deep .search-field .mat-mdc-form-field-infix {
+  min-height: 48px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+:host ::ng-deep .search-field .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
+:host ::ng-deep .search-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  margin-top: 3px;
+}
+
+:host ::ng-deep .search-field .mat-mdc-select-value {
+  margin-top: 3px;
+}
+
+.mat-column-name {
+  min-width: 260px;
+}
+
+.mat-column-phone {
+  min-width: 145px;
+}
+
+.mat-column-project {
+  min-width: 120px;
+}
+
+.mat-column-organization {
+  min-width: 140px;
+}
+
+.mat-column-lastSeen {
+  min-width: 120px;
+}
+
+.mat-column-actions {
+  min-width: 124px;
+}
+
+.table-container {
+  overflow-x: auto;
+
+  .contacts-table {
+    min-width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      white-space: nowrap;
+    }
+  }
+}
+
+td.mat-column-actions {
+  padding-right: 24px !important;
+}
+
+.mat-mdc-paginator {
+  background-color: var(--background-color);
 }

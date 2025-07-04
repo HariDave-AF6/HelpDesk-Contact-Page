@@ -13,12 +13,17 @@
   z-index: 1000;
 }
 
+.navbar-right-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .navbar-left {
   display: flex;
   flex-direction: row;
   align-items: center;
-  min-width: 250px;
-  gap: 15px;
+  gap: 10px;
 }
 
 .app-title {
@@ -34,7 +39,7 @@
   margin-top: -2px;
 }
 
-.navbar-center {
+.navbar-right-section-left {
   flex: 1;
   max-width: 500px;
   margin-top: 20px;
@@ -74,9 +79,9 @@
     color: white;
     font-size: 10px;
     font-weight: 600;
-    width: 18px;
-    height: 18px;
-    line-height: 18px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
   }
 }
 
@@ -133,4 +138,45 @@
 
 .user-menu {
   min-width: 200px;
+}
+
+// Search & Select Customization
+:host ::ng-deep .mdc-text-field--outlined .mat-mdc-form-field-infix,
+:host ::ng-deep .mdc-text-field--no-label .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+:host ::ng-deep .mat-mdc-form-field-infix {
+  min-height: 48px !important;
+}
+
+:host ::ng-deep .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
+:host ::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+  margin-top: 3px;
+}
+
+:host ::ng-deep .mat-mdc-select-value {
+  margin-top: 3px;
+}
+
+@media (max-width: 992px) {
+  .app-title {
+    display: none;
+  }
+
+  .navbar-right-section-left {
+    margin-top: 0px;
+  }
+
+  .project-dropdown {
+    min-width: auto;
+    width: 120px;
+    .mat-form-field-wrapper {
+      padding: 0;
+    }
+    .mat-select-placeholder {
+      font-size: 12px;
+    }
+  }
 }

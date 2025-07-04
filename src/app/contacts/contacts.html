@@ -8,19 +8,19 @@
       </p>
     </div>
     <div class="header-actions">
-      <button mat-stroked-button class="action-btn">
+      <button matButton="outlined" color="primary" class="action-btn">
         <mat-icon>filter_list</mat-icon>
         Filter
       </button>
-      <button mat-stroked-button class="action-btn">
+      <button matButton="outlined" color="primary" class="action-btn">
         <mat-icon>file_download</mat-icon>
         Import
       </button>
-      <button mat-stroked-button class="action-btn">
+      <button matButton="outlined" color="primary" class="action-btn">
         <mat-icon>file_upload</mat-icon>
         Export
       </button>
-      <button mat-raised-button color="primary" class="add-contact-btn">
+      <button matButton="elevated" color="primary" class="add-contact-btn">
         <mat-icon>add</mat-icon>
         Add Contact
       </button>
@@ -30,18 +30,23 @@
   <!-- Search and Tabs -->
   <div class="search-tabs-section">
     <mat-form-field appearance="outline" class="search-field">
-      <input
-        matInput
-        placeholder="Search contacts..."
-        (keyup)="applyFilter($event)"
-        #searchInput
-      />
+      <input matInput placeholder="Search contacts..." (keyup)="applyFilter($event)" #searchInput />
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
 
     <mat-tab-group class="contacts-tabs" (selectedTabChange)="onTabChange($event.index)">
-      <mat-tab label="persons"></mat-tab>
-      <mat-tab label="organizations"></mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>person</mat-icon>
+          <span class="tab-label">Persons</span>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>business</mat-icon>
+          <span class="tab-label">Organizations</span>
+        </ng-template>
+      </mat-tab>
     </mat-tab-group>
   </div>
 
@@ -76,7 +81,7 @@
 
       <!-- Phone Column -->
       <ng-container matColumnDef="phone">
-        <mat-header-cell *matHeaderCellDef>Phone</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header="phone">Phone</mat-header-cell>
         <mat-cell *matCellDef="let contact">
           <a href="tel:{{contact.phone}}" class="phone-link"
             >{{contact.phone}}</a
@@ -96,8 +101,7 @@
 
       <!-- Last Seen Column -->
       <ng-container matColumnDef="lastSeen">
-        <mat-header-cell *matHeaderCellDef mat-sort-header="lastSeen"
-          >Last Seen</mat-header-cell
+        <mat-header-cell *matHeaderCellDef>Last Seen</mat-header-cell
         >
         <mat-cell *matCellDef="let contact">
           <span class="last-contact">{{contact.lastSeen}}</span>
@@ -125,4 +129,20 @@
       ></mat-row>
     </mat-table>
   </div>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons style="margin-top: 1rem;"></mat-paginator>
 </div>
+
+
+<!--
+| Tag / Directive                                    | Purpose                                                   |
+| -------------------------------------------------- | --------------------------------------------------------- |
+| `<mat-table>`                                      | Container for Material data table; accepts data source    |
+| `[dataSource]`                                     | Binds the data array or DataSource object                 |
+| `matSort`                                          | Enables sorting functionality                             |
+| `<ng-container matColumnDef="colName">`            | Defines a column (header + cells) named `colName`         |
+| `<mat-header-cell *matHeaderCellDef>`              | Template for header cell content                          |
+| `<mat-cell *matCellDef="let row">`                 | Template for data cell content, with current row variable |
+| `<mat-header-row *matHeaderRowDef="columns">`      | Defines header row with specified columns                 |
+| `<mat-row *matRowDef="let row; columns: columns">` | Defines data row with columns and row variable            |
+-->

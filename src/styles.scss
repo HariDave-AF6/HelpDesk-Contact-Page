@@ -46,26 +46,10 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 3px;
 }
 
-// Search & Select Customization
-.mdc-text-field--outlined .mat-mdc-form-field-infix, .mdc-text-field--no-label .mat-mdc-form-field-infix {
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-}
-
-.mat-mdc-form-field-infix {
-  min-height: 48px !important;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-.mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input, .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
-  margin-top: 3px;
-}
-
-.mat-mdc-select-value {
-  margin-top: 3px;
+.mat-mdc-paginator {
+  font-size: 14px !important;
 }

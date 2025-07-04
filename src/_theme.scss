@@ -3,6 +3,10 @@
 // Include the common styles for Angular Material
 @include mat.core();
 
+// -------------------------
+// DEFAULT THEME
+// -------------------------
+
 // Define custom color palettes
 $custom-blue-palette: (
   50: #e3f2fd,
@@ -86,16 +90,56 @@ $custom-theme: mat.m2-define-light-theme((
   density: 0,
 ));
 
-// Include theme styles for core and each component used in your app
-@include mat.all-component-themes($custom-theme);
+// -------------------------
+// GREEN THEME
+// -------------------------
 
-// Custom CSS variables for consistent theming
-:root {
+$green-primary: mat.m2-define-palette(mat.$m2-green-palette, 700);
+$green-accent: mat.m2-define-palette(mat.$m2-teal-palette, A200);
+$green-warn: mat.m2-define-palette($custom-red-palette, 500);
+
+$green-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $green-primary,
+    accent: $green-accent,
+    warn: $green-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+// -------------------------
+// THEME WRAPPERS
+// -------------------------
+
+.theme-default {
+  @include mat.all-component-themes($custom-theme);
+}
+
+.theme-green {
+  @include mat.all-component-themes($green-theme);
+}
+
+.theme-default {
   --primary-color: #1976d2;
   --primary-light: #42a5f5;
   --primary-dark: #0d47a1;
   --accent-color: #3f51b5;
   --warn-color: #f44336;
+  --background-color: #fafafa; // #e3f2fd
+}
+
+.theme-green {
+  --primary-color: #388e3c;
+  --primary-light: #66bb6a;
+  --primary-dark:  #2e7d32;
+  --accent-color: #009688;
+  --warn-color: #f44336;
+  --background-color: #fafafa; // #f1f8e9
+}
+
+// Custom CSS variables for consistent theming
+:root {
   --background-color: #fafafa;
   --surface-color: #ffffff;
   --text-primary: rgba(0, 0, 0, 0.87);
@@ -103,32 +147,4 @@ $custom-theme: mat.m2-define-light-theme((
   --border-color: #e0e0e0;
   --sidebar-background: #ffffff;
   --navbar-background: #ffffff;
-}
-
-// Global styles
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-primary);
-}
-
-.mat-toolbar {
-  background-color: var(--navbar-background) !important;
-  color: var(--text-primary) !important;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.mat-sidenav {
-  background-color: var(--sidebar-background) !important;
-  border-right: 1px solid var(--border-color);
-}
-
-.mat-card {
-  background-color: var(--surface-color) !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-.mat-table {
-  background-color: var(--surface-color) !important;
 }
