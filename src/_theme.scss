@@ -90,10 +90,8 @@ $custom-theme: mat.m2-define-light-theme((
   density: 0,
 ));
 
-// -------------------------
-// GREEN THEME
-// -------------------------
 
+// Light Green Theme
 $green-primary: mat.m2-define-palette(mat.$m2-green-palette, 700);
 $green-accent: mat.m2-define-palette(mat.$m2-teal-palette, A200);
 $green-warn: mat.m2-define-palette($custom-red-palette, 500);
@@ -108,19 +106,25 @@ $green-theme: mat.m2-define-light-theme((
   density: 0,
 ));
 
-// -------------------------
-// THEME WRAPPERS
-// -------------------------
+// Dark Theme
+$dark-primary: mat.m2-define-palette(mat.$m2-light-blue-palette, 200); // brighter blue
+$dark-accent: mat.m2-define-palette(mat.$m2-cyan-palette, A200);
+$dark-warn: mat.m2-define-palette($custom-red-palette, 500);
+
+$dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+// ------------------------- THEME WRAPPERS -------------------------
 
 .theme-default {
   @include mat.all-component-themes($custom-theme);
-}
-
-.theme-green {
-  @include mat.all-component-themes($green-theme);
-}
-
-.theme-default {
   --primary-color: #1976d2;
   --primary-light: #42a5f5;
   --primary-dark: #0d47a1;
@@ -130,12 +134,29 @@ $green-theme: mat.m2-define-light-theme((
 }
 
 .theme-green {
+  @include mat.all-component-themes($green-theme);
   --primary-color: #388e3c;
   --primary-light: #66bb6a;
   --primary-dark:  #2e7d32;
   --accent-color: #009688;
   --warn-color: #f44336;
   --background-color: #fafafa; // #f1f8e9
+}
+
+.theme-dark {
+  @include mat.all-component-themes($dark-theme);
+  --primary-color: #90caf9; // light blue for dark mode
+  --primary-light: #e3f2fd;
+  --primary-dark: #42a5f5;
+  --accent-color: #00bcd4; // cyan
+  --warn-color: #f44336;
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --border-color: #333;
+  --sidebar-background: #1e1e1e;
+  --navbar-background: #1e1e1e;
 }
 
 // Custom CSS variables for consistent theming

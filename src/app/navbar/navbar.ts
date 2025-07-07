@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatOptionModule } from '@angular/material/core';
@@ -6,6 +6,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbar } from '@angular/material/toolbar';
+import { ThemeService } from '../services/theme-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -20,12 +22,20 @@ export class Navbar {
   chatCount: number = 2;
   selectedProject: string = 'all';
   isMobile: boolean = false;
+  selectedTheme: string = 'theme-default';
+  themeSub!: Subscription;
 
   @Output() toggleSidebar = new EventEmitter<void>();
   @Output() projectChanged = new EventEmitter<string>();
 
-  constructor() {
+  constructor(private themeService: ThemeService) {
     this.checkScreen();
+  }
+
+  ngOnInit() {
+    this.themeSub = this.themeService.themeName.subscribe(theme => {
+      this.selectedTheme = theme;
+    });
   }
 
   @HostListener('window:resize')

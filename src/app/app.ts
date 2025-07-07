@@ -1,9 +1,8 @@
-import { Component, HostListener, ViewChild, viewChild } from '@angular/core';
+import { Component, HostListener, ViewChild } from '@angular/core';
 import { Sidebar } from './sidebar/sidebar';
 import { Navbar } from './navbar/navbar';
 import { Contacts } from './contacts/contacts';
 import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
-import { ThemeService } from './services/theme-service';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +17,6 @@ export class App {
   @ViewChild('drawer') drawer!: MatDrawer;
   isMobile: boolean = false;
   mode: 'side' | 'over' = 'side';
-
-  constructor(private themeService: ThemeService) {}
-
-  switchTheme(theme: 'theme-default' | 'theme-green') {
-    this.themeService.setTheme(theme);
-  }
 
   onProjectChanged(project: string) {
     this.selectedProject = project;

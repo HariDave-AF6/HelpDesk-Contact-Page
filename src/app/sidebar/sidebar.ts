@@ -1,9 +1,9 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
+import { ThemeService } from '../services/theme-service';
 
 interface MenuItem {
   icon: string;
@@ -15,7 +15,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [MatIcon, MatMenu, MatDivider, RouterLink, MatMenuTrigger, NgIf, NgFor],
+  imports: [MatIcon, MatMenu, MatDivider, RouterLink, MatMenuTrigger],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })
@@ -45,8 +45,12 @@ export class Sidebar {
     { icon: 'settings', label: 'Settings', route: '/settings' }
   ];
 
-  constructor() {
+  constructor(private themeService: ThemeService) {
     this.updateMenuItems();
+  }
+
+  switchTheme(theme: 'theme-default' | 'theme-green' | 'theme-dark') {
+    this.themeService.setTheme(theme);
   }
 
   ngOnChanges(changes: SimpleChanges) {

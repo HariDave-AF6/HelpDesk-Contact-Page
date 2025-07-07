@@ -161,19 +161,21 @@
 }
 
 .profile-menu-btn {
-  color: var(--text-secondary);
   width: 32px;
   height: 32px;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  background-color: transparent !important;
+  border-radius: 50% !important;
+  width: 42px !important;
+  height: 42px !important;
+  border: none;
+  cursor: pointer;
 
   mat-icon {
     font-size: 18px;
     width: 18px;
     height: 18px;
-  }
-
-  &:hover {
-    background-color: rgba(25, 118, 210, 0.08);
-    color: var(--primary-color);
   }
 }
 
@@ -194,4 +196,14 @@
       padding: 16px;
     }
   }
+}
+
+.default-theme-color-circle{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8px;
+  cursor: pointer;
+  margin-bottom: 1rem;
 }

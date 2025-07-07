@@ -112,7 +112,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let contact">
-          <button class="mat-icon-button" style="margin-right: 10px">
+          <button class="edit-action mat-icon-button" style="margin-right: 10px">
             <mat-icon color="primary">edit</mat-icon>
           </button>
           <button class="delete-action mat-icon-button">
@@ -130,7 +130,7 @@
     </mat-table>
   </div>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons style="margin-top: 1rem;"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons style="margin-top: 1rem;"></mat-paginator>
 </div>
 
 
