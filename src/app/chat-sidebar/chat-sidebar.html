@@ -1,0 +1,86 @@
+<div class="chat-sidebar">
+  <!-- Sidebar header -->
+  <div class="chat-sidebar-header">
+    <div class="title">Chats & Messages</div>
+    <button mat-icon-button (click)="closeDrawer()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Chats -->
+  <section class="sidebar-section">
+    <div class="section-header">
+      <div class="section-title">
+        <mat-icon>chat</mat-icon>
+        Chats
+      </div>
+      <button class="view-all" (click)="goToAll('chats')">View All</button>
+    </div>
+    <div class="section-content">
+      @for(chat of topActiveChats; track chat) {
+        <div class="chat-item" (click)="openChat(chat)">
+          <div class="chat-details">
+            <div class="chat-name">{{ chat.name }}</div>
+            <div class="chat-meta">{{ chat.project }}</div>
+            <div class="chat-meta">Duration: {{ chat.duration }}</div>
+          </div>
+          <span class="chat-status" [ngClass]="chat.status">{{ chat.status }}</span>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Direct Messages -->
+  <section class="sidebar-section">
+    <div class="section-header">
+      <div class="section-title">
+        <mat-icon>mail</mat-icon>
+        Direct Messages
+      </div>
+      <button class="view-all" (click)="goToAll('direct')">View All</button>
+    </div>
+    <div class="section-content">
+      @for(dm of topDirectMessages; track dm) {
+        <div class="dm-item" (click)="openDirectMessage(dm)">
+          <div class="dm-avatar">{{ dm.initials }}</div>
+          <div class="dm-info">
+            <div class="dm-name">{{ dm.name }}
+              @if(dm.online) {
+                <span class="online-dot"></span>
+              }
+            </div>
+            <div class="dm-msg">{{ dm.message }}</div>
+          </div>
+          <div class="dm-time">{{ dm.time }}</div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Groups -->
+  <section class="sidebar-section">
+    <div class="section-header">
+      <div class="section-title">
+        <mat-icon>group</mat-icon>
+        Groups
+      </div>
+      <button class="view-all" (click)="goToAll('groups')">View All</button>
+    </div>
+    <div class="section-content">
+      @for(group of topGroups; track group) {
+        <div class="group-item" (click)="openGroup(group)">
+          <div class="group-info">
+            <div class="group-name">{{ group.name }}</div>
+            <div class="group-msg">{{ group.message }}</div>
+          </div>
+          <div class="group-meta">
+            <span class="group-time">{{ group.time }}</span>
+            @if(group.count > 0) {
+              <span class="group-count">{{ group.count }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+</div>

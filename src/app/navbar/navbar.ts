@@ -26,6 +26,7 @@ export class Navbar {
   themeSub!: Subscription;
 
   @Output() toggleSidebar = new EventEmitter<void>();
+  @Output() toggleRightSidebar = new EventEmitter<void>();
   @Output() projectChanged = new EventEmitter<string>();
 
   constructor(private themeService: ThemeService) {
@@ -49,5 +50,9 @@ export class Navbar {
 
   onMenuClick() {
     this.toggleSidebar.emit();
+  }
+
+  onChatClick() {
+    this.toggleRightSidebar.emit();
   }
 }

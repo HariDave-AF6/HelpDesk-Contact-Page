@@ -1,14 +1,21 @@
 <div class="app-container">
-  <app-navbar (toggleSidebar)="drawer.toggle()" (projectChanged)="onProjectChanged($event)"></app-navbar>
+  <app-navbar (toggleSidebar)="drawer.toggle()" (toggleRightSidebar)="rightDrawer.toggle()" (projectChanged)="onProjectChanged($event)"></app-navbar>
   <mat-drawer-container style="height: 100%;">
-    <mat-drawer #drawer [mode]="mode">
+    <mat-drawer #drawer [mode]="mode" position="start">
       <app-sidebar [selectedProject]="selectedProject"></app-sidebar>
+    </mat-drawer>
+
+    <mat-drawer #rightDrawer [mode]="mode"  position="end">
+      <app-chat-sidebar [rightDrawer]="rightDrawer"></app-chat-sidebar>
     </mat-drawer>
 
     <mat-drawer-content>
       <div class="content-area">
         <app-contacts [selectedProject]="selectedProject"></app-contacts>
       </div>
+      <!-- <div class="content-area">
+        <router-outlet></router-outlet>
+      </div> -->
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

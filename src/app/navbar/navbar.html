@@ -52,7 +52,9 @@
 
       <button class="nav-icon-button">
         <mat-icon [matBadge]="chatCount" matBadgeColor="warn"
-                  [matBadgeHidden]="chatCount === 0">chat</mat-icon>
+                  [matBadgeHidden]="chatCount === 0" (click)="onChatClick()">
+                  chat
+        </mat-icon>
       </button>
     </div>
   </div>
