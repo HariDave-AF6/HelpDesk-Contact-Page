@@ -24,6 +24,7 @@ export class Navbar {
   isMobile: boolean = false;
   selectedTheme: string = 'theme-default';
   themeSub!: Subscription;
+  label: string = 'Select Project';
 
   @Output() toggleSidebar = new EventEmitter<void>();
   @Output() toggleRightSidebar = new EventEmitter<void>();
@@ -41,7 +42,9 @@ export class Navbar {
 
   @HostListener('window:resize')
   checkScreen() {
-    this.isMobile = window.innerWidth <= 992;
+    this.isMobile = window.innerWidth <= 959.98;
+
+    this.label = this.isMobile ? 'Project' : 'Select Project';
   }
 
   onProjectChange() {

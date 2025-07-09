@@ -27,7 +27,6 @@ html, body {
 }
 
 .mat-icon-button {
-  // background-color: transparent;
   border-radius: 50% !important;
   width: 36px !important;
   height: 36px !important;
@@ -52,4 +51,8 @@ html, body {
 
 .mat-mdc-paginator {
   font-size: 14px !important;
+}
+
+.mat-mdc-paginator-range-label {
+  margin: 0 16px 0 16px !important;
 }

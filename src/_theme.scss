@@ -3,10 +3,6 @@
 // Include the common styles for Angular Material
 @include mat.core();
 
-// -------------------------
-// DEFAULT THEME
-// -------------------------
-
 // Define custom color palettes
 $custom-blue-palette: (
   50: #e3f2fd,
@@ -14,9 +10,9 @@ $custom-blue-palette: (
   200: #90caf9,
   300: #64b5f6,
   400: #42a5f5,
-  500: #2196f3,  // Primary blue
+  500: #2196f3,
   600: #1e88e5,
-  700: #1976d2,  // Royal blue
+  700: #1976d2,
   800: #1565c0,
   900: #0d47a1,
   A100: #82b1ff,
@@ -47,7 +43,7 @@ $custom-red-palette: (
   200: #ef9a9a,
   300: #e57373,
   400: #ef5350,
-  500: #f44336,  // Primary red
+  500: #f44336,
   600: #e53935,
   700: #d32f2f,
   800: #c62828,
@@ -74,12 +70,11 @@ $custom-red-palette: (
   )
 );
 
-// Create the theme object
+// ------------------------- DEFAULT THEME -------------------------
 $custom-primary: mat.m2-define-palette($custom-blue-palette, 700);
 $custom-accent: mat.m2-define-palette(mat.$m2-indigo-palette, A200, A100, A400);
 $custom-warn: mat.m2-define-palette($custom-red-palette, 500);
 
-// Create the theme
 $custom-theme: mat.m2-define-light-theme((
   color: (
     primary: $custom-primary,
@@ -90,8 +85,7 @@ $custom-theme: mat.m2-define-light-theme((
   density: 0,
 ));
 
-
-// Light Green Theme
+// ------------------------- GREEN THEME -------------------------
 $green-primary: mat.m2-define-palette(mat.$m2-green-palette, 700);
 $green-accent: mat.m2-define-palette(mat.$m2-teal-palette, A200);
 $green-warn: mat.m2-define-palette($custom-red-palette, 500);
@@ -106,8 +100,8 @@ $green-theme: mat.m2-define-light-theme((
   density: 0,
 ));
 
-// Dark Theme
-$dark-primary: mat.m2-define-palette(mat.$m2-light-blue-palette, 200); // brighter blue
+// ------------------------- DARK THEME -------------------------
+$dark-primary: mat.m2-define-palette(mat.$m2-light-blue-palette, 200);
 $dark-accent: mat.m2-define-palette(mat.$m2-cyan-palette, A200);
 $dark-warn: mat.m2-define-palette($custom-red-palette, 500);
 
@@ -123,43 +117,6 @@ $dark-theme: mat.m2-define-dark-theme((
 
 // ------------------------- THEME WRAPPERS -------------------------
 
-.theme-default {
-  @include mat.all-component-themes($custom-theme);
-  --primary-color: #1976d2;
-  --primary-light: #42a5f5;
-  --primary-dark: #0d47a1;
-  --accent-color: #3f51b5;
-  --warn-color: #f44336;
-  --background-color: #fafafa; // #e3f2fd
-}
-
-.theme-green {
-  @include mat.all-component-themes($green-theme);
-  --primary-color: #388e3c;
-  --primary-light: #66bb6a;
-  --primary-dark:  #2e7d32;
-  --accent-color: #009688;
-  --warn-color: #f44336;
-  --background-color: #fafafa; // #f1f8e9
-}
-
-.theme-dark {
-  @include mat.all-component-themes($dark-theme);
-  --primary-color: #90caf9; // light blue for dark mode
-  --primary-light: #e3f2fd;
-  --primary-dark: #42a5f5;
-  --accent-color: #00bcd4; // cyan
-  --warn-color: #f44336;
-  --background-color: #121212;
-  --surface-color: #1e1e1e;
-  --text-primary: rgba(255, 255, 255, 0.87);
-  --text-secondary: rgba(255, 255, 255, 0.6);
-  --border-color: #333;
-  --sidebar-background: #1e1e1e;
-  --navbar-background: #1e1e1e;
-}
-
-// Custom CSS variables for consistent theming
 :root {
   --background-color: #fafafa;
   --surface-color: #ffffff;
@@ -168,4 +125,43 @@ $dark-theme: mat.m2-define-dark-theme((
   --border-color: #e0e0e0;
   --sidebar-background: #ffffff;
   --navbar-background: #ffffff;
+}
+
+.theme-default {
+  --primary-color: #1976d2;
+  --primary-light: #42a5f5;
+  --primary-dark: #0d47a1;
+  --accent-color: #3f51b5;
+  --warn-color: #f44336;
+  --background-color: #fafafa;
+
+  @include mat.all-component-themes($custom-theme);
+}
+
+.theme-green {
+  --primary-color: #388e3c;
+  --primary-light: #66bb6a;
+  --primary-dark:  #2e7d32;
+  --accent-color: #009688;
+  --warn-color: #f44336;
+  --background-color: #fafafa;
+
+  @include mat.all-component-themes($green-theme);
+}
+
+.theme-dark {
+  --primary-color: #90caf9;
+  --primary-light: #e3f2fd;
+  --primary-dark: #42a5f5;
+  --accent-color: #00bcd4;
+  --warn-color: #f44336;
+  --background-color: #121212;
+  --surface-color: #1e1e1e;
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --border-color: #333;
+  --sidebar-background: #1e1e1e;
+  --navbar-background: #1e1e1e;
+
+  @include mat.all-component-themes($dark-theme);
 }

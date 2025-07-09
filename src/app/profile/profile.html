@@ -1,0 +1,171 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="header-left">
+      <h1 class="page-title">Profile</h1>
+      <p class="page-subtitle">Manage your account information and preferences</p>
+    </div>
+  </div>
+
+  <mat-tab-group class="profile-tabs">
+    <!-- Profile Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>person</mat-icon>
+        <span class="tab-label">Profile</span>
+      </ng-template>
+
+      <div class="tab-content">
+        <mat-card class="section-card">
+          <div class="profile-info">
+            <div class="avatar-upload">
+              <img src="https://via.placeholder.com/100" alt="Avatar" class="avatar-img" />
+              <input type="file" id="avatarInput" hidden>
+              <label for="avatarInput" class="upload-btn">
+                <mat-icon>photo_camera</mat-icon>
+              </label>
+            </div>
+
+            <div class="info-form">
+              <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput placeholder="John">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput placeholder="Doe">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="john.doe@company.com">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input matInput placeholder="+91 8545328976">
+              </mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Department</mat-label>
+                <input matInput placeholder="Customer Support">
+              </mat-form-field>
+
+              <div class="form-actions">
+                <button matButton="elevated" color="primary">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Security Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>lock</mat-icon>
+        <span class="tab-label">Security</span>
+      </ng-template>
+
+      <div class="tab-content">
+        <mat-card class="section-card">
+          <h3>Password</h3>
+          <div class="security-form">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Current Password</mat-label>
+              <input matInput type="password">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>New Password</mat-label>
+              <input matInput type="password">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Confirm New Password</mat-label>
+              <input matInput type="password">
+            </mat-form-field>
+            <div class="form-actions">
+              <button mat-raised-button color="primary">Update Password</button>
+            </div>
+          </div>
+
+          <h3>Two-Factor Authentication</h3>
+          <div class="two-factor">
+            <mat-card class="option-card">
+              <mat-icon>security</mat-icon>
+              <div>
+                <p>TOTP Authenticator</p>
+                <span>Use Google Authenticator for 2FA</span>
+              </div>
+              <button mat-stroked-button color="primary">Enable</button>
+            </mat-card>
+            <mat-card class="option-card">
+              <mat-icon>fingerprint</mat-icon>
+              <div>
+                <p>Passkeys</p>
+                <span>Use biometric login</span>
+              </div>
+              <button mat-stroked-button color="primary">Setup</button>
+            </mat-card>
+          </div>
+        </mat-card>
+      </div>
+    </mat-tab>
+
+    <!-- Settings Tab -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>settings</mat-icon>
+        <span class="tab-label">Settings</span>
+      </ng-template>
+
+      <div class="tab-content settings-tab">
+        <div class="settings-sidebar">
+          <button mat-button (click)="activeSetting = 'appearance'" [class.active]="activeSetting === 'appearance'">
+            <mat-icon>palette</mat-icon>
+            Appearance
+          </button>
+          <button mat-button (click)="activeSetting = 'notifications'" [class.active]="activeSetting === 'notifications'">
+            <mat-icon>notifications</mat-icon>
+            Notifications
+          </button>
+          <button mat-button (click)="activeSetting = 'privacy'" [class.active]="activeSetting === 'privacy'">
+            <mat-icon>security</mat-icon>
+            Privacy
+          </button>
+          <button mat-button (click)="activeSetting = 'integrations'" [class.active]="activeSetting === 'integrations'">
+            <mat-icon>extension</mat-icon>
+            Integrations
+          </button>
+        </div>
+
+        <div class="settings-content">
+          <ng-container [ngSwitch]="activeSetting">
+            <div *ngSwitchCase="'appearance'">
+              <h3>Appearance</h3>
+              <p>Select your preferred theme color:</p>
+              <div class="theme-options">
+                <button class="color-option blue"></button>
+                <button class="color-option green"></button>
+                <button class="color-option purple"></button>
+                <button class="color-option orange"></button>
+              </div>
+            </div>
+            <div *ngSwitchCase="'notifications'">
+              <h3>Notifications</h3>
+              <p>Manage your email and push notifications.</p>
+            </div>
+            <div *ngSwitchCase="'privacy'">
+              <h3>Privacy</h3>
+              <p>Control your account privacy settings.</p>
+            </div>
+            <div *ngSwitchCase="'integrations'">
+              <h3>Integrations</h3>
+              <p>Manage connected apps and services.</p>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+

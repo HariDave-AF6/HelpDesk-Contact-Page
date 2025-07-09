@@ -2,13 +2,13 @@
   <div class="navbar-left">
     @switch (selectedTheme) {
       @case ('theme-green') {
-        <img src="/assets/images/logo-green.png" alt="Logo" width="65" height="70" style="margin-top: 5px;"/>
+        <img class="helpdesk-navbar-logo" src="/assets/images/logo-green.png" alt="HelpDesk Logo"/>
       }
       @case ('theme-dark') {
-        <img src="/assets/images/logo-dark.png" alt="Logo" width="65" height="70" style="margin-top: 5px;"/>
+        <img class="helpdesk-navbar-logo" src="/assets/images/logo-dark.png" alt="HelpDesk Logo"/>
       }
       @default {
-        <img src="/assets/images/logo-default.png" alt="Logo" width="65" height="70" style="margin-top: 5px;"/>
+        <img class="helpdesk-navbar-logo" src="/assets/images/logo-default.png" alt="HelpDesk Logo"/>
       }
     }
 
@@ -21,7 +21,7 @@
 
   <div class="navbar-right-section">
     <mat-form-field appearance="outline" class="project-dropdown" style="margin-top: 20px;">
-      <mat-label>Select Project</mat-label>
+      <mat-label>{{ label }}</mat-label>
       <mat-select [(ngModel)]="selectedProject" (selectionChange)="onProjectChange()">
         <mat-option value="all">All Projects</mat-option>
         <mat-option value="Hotel Royal">Hotel Royal</mat-option>
@@ -38,7 +38,7 @@
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
       } @else {
-        <button class="nav-icon-button">
+        <button class="nav-icon-button search-button">
           <mat-icon>search</mat-icon>
         </button>
       }

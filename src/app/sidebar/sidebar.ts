@@ -15,7 +15,7 @@ interface MenuItem {
 
 @Component({
   selector: 'app-sidebar',
-  imports: [MatIcon, MatMenu, MatDivider, RouterLink, MatMenuTrigger],
+  imports: [MatIcon, MatMenu, MatDivider, RouterLink, MatMenuTrigger, RouterLink],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.scss'
 })

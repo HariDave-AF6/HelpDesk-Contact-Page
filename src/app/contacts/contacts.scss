@@ -175,7 +175,7 @@
 }
 
 // Responsive Design
-@media (max-width: 1200px) {
+@media (max-width: 1279.98px) {
   .contacts-header {
     flex-direction: column;
     gap: 20px;
@@ -189,7 +189,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 959.98px) {
   .header-left .page-title {
     font-size: 24px;
   }
@@ -213,7 +213,7 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 599.98px) {
   .search-tabs-section {
     flex-direction: column;
     gap: 16px;
@@ -228,6 +228,10 @@
     flex-shrink: 0;
     width: 100%;
     margin: 0 0 20px auto;
+  }
+
+  ::ng-deep .mat-mdc-outlined-button {
+    padding: 0 10px !important;
   }
 }
 

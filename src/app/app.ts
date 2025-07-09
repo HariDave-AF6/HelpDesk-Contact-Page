@@ -1,14 +1,13 @@
 import { Component, HostListener, ViewChild } from '@angular/core';
 import { Sidebar } from './sidebar/sidebar';
 import { Navbar } from './navbar/navbar';
-import { Contacts } from './contacts/contacts';
 import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
 import { ChatSidebar } from './chat-sidebar/chat-sidebar';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [Sidebar, Navbar, Contacts, MatDrawerContainer, MatDrawer, MatDrawerContent, ChatSidebar, RouterOutlet],
+  imports: [Sidebar, Navbar, MatDrawerContainer, MatDrawer, MatDrawerContent, ChatSidebar, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -35,7 +34,7 @@ export class App {
   }
 
   checkScreen() {
-    this.isMobile = window.innerWidth <= 992;
+    this.isMobile = window.innerWidth <= 959.98;
 
     if (this.isMobile) {
       this.drawer?.close();
