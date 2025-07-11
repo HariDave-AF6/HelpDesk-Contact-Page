@@ -23,7 +23,7 @@
 
   &.active {
     .nav-link {
-      background-color: rgba(25, 118, 210, 0.08);
+      background-color: rgba(var(--primary-color-rgb), 0.1);
       color: var(--primary-color);
       border-right: 3px solid var(--primary-color);
 
@@ -44,7 +44,7 @@
   position: relative;
 
   &:hover {
-    background-color: rgba(25, 118, 210, 0.04);
+    background-color: rgba(var(--primary-color-rgb), 0.1);
     color: var(--primary-color);
 
     .nav-icon {
@@ -68,7 +68,6 @@
 }
 
 .nav-badge {
-  background-color: var(--primary-color);
   color: white;
   border-radius: 12px;
   padding: 2px 8px;
@@ -130,8 +129,8 @@
   gap: 12px;
   padding: 12px;
   border-radius: 8px;
-  background-color: rgba(25, 118, 210, 0.02);
-  border: 1px solid rgba(25, 118, 210, 0.1);
+  background-color: rgba(var(--primary-color-rgb), 0.08);
+  border: 1px solid rgba(var(--primary-color-rgb), 0.2);
 }
 
 .profile-avatar {
@@ -177,16 +176,6 @@
     width: 18px;
     height: 18px;
   }
-}
-
-.default-theme-color-circle{
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 8px;
-  cursor: pointer;
-  margin-bottom: 1rem;
 }
 
 // Responsive design

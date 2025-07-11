@@ -4,76 +4,76 @@
 @include mat.core();
 
 // Define custom color palettes
-$custom-blue-palette: (
-  50: #e3f2fd,
-  100: #bbdefb,
-  200: #90caf9,
-  300: #64b5f6,
-  400: #42a5f5,
-  500: #2196f3,
-  600: #1e88e5,
-  700: #1976d2,
-  800: #1565c0,
-  900: #0d47a1,
-  A100: #82b1ff,
-  A200: #448aff,
-  A400: #2979ff,
-  A700: #2962ff,
-  contrast: (
-    50: rgba(black, 0.87),
-    100: rgba(black, 0.87),
-    200: rgba(black, 0.87),
-    300: rgba(black, 0.87),
-    400: rgba(black, 0.87),
-    500: white,
-    600: white,
-    700: white,
-    800: white,
-    900: white,
-    A100: rgba(black, 0.87),
-    A200: white,
-    A400: white,
-    A700: white,
-  )
-);
+// $custom-blue-palette: (
+//   50: #e3f2fd,
+//   100: #bbdefb,
+//   200: #90caf9,
+//   300: #64b5f6,
+//   400: #42a5f5,
+//   500: #2196f3,
+//   600: #1e88e5,
+//   700: #1976d2,
+//   800: #1565c0,
+//   900: #0d47a1,
+//   A100: #82b1ff,
+//   A200: #448aff,
+//   A400: #2979ff,
+//   A700: #2962ff,
+//   contrast: (
+//     50: rgba(black, 0.87),
+//     100: rgba(black, 0.87),
+//     200: rgba(black, 0.87),
+//     300: rgba(black, 0.87),
+//     400: rgba(black, 0.87),
+//     500: white,
+//     600: white,
+//     700: white,
+//     800: white,
+//     900: white,
+//     A100: rgba(black, 0.87),
+//     A200: white,
+//     A400: white,
+//     A700: white,
+//   )
+// );
 
-$custom-red-palette: (
-  50: #ffebee,
-  100: #ffcdd2,
-  200: #ef9a9a,
-  300: #e57373,
-  400: #ef5350,
-  500: #f44336,
-  600: #e53935,
-  700: #d32f2f,
-  800: #c62828,
-  900: #b71c1c,
-  A100: #ff8a80,
-  A200: #ff5252,
-  A400: #ff1744,
-  A700: #d50000,
-  contrast: (
-    50: rgba(black, 0.87),
-    100: rgba(black, 0.87),
-    200: rgba(black, 0.87),
-    300: rgba(black, 0.87),
-    400: rgba(black, 0.87),
-    500: white,
-    600: white,
-    700: white,
-    800: white,
-    900: white,
-    A100: rgba(black, 0.87),
-    A200: white,
-    A400: white,
-    A700: white,
-  )
-);
+// $custom-red-palette: (
+//   50: #ffebee,
+//   100: #ffcdd2,
+//   200: #ef9a9a,
+//   300: #e57373,
+//   400: #ef5350,
+//   500: #f44336,
+//   600: #e53935,
+//   700: #d32f2f,
+//   800: #c62828,
+//   900: #b71c1c,
+//   A100: #ff8a80,
+//   A200: #ff5252,
+//   A400: #ff1744,
+//   A700: #d50000,
+//   contrast: (
+//     50: rgba(black, 0.87),
+//     100: rgba(black, 0.87),
+//     200: rgba(black, 0.87),
+//     300: rgba(black, 0.87),
+//     400: rgba(black, 0.87),
+//     500: white,
+//     600: white,
+//     700: white,
+//     800: white,
+//     900: white,
+//     A100: rgba(black, 0.87),
+//     A200: white,
+//     A400: white,
+//     A700: white,
+//   )
+// );
 
 // ------------------------- DEFAULT THEME -------------------------
-$custom-primary: mat.m2-define-palette($custom-blue-palette, 700);
+$custom-primary: mat.m2-define-palette(mat.$m2-blue-palette, 700);
 $custom-accent: mat.m2-define-palette(mat.$m2-indigo-palette, A200, A100, A400);
-$custom-warn: mat.m2-define-palette($custom-red-palette, 500);
+$custom-warn: mat.m2-define-palette(mat.$m2-red-palette, 500);
 
 $custom-theme: mat.m2-define-light-theme((
   color: (
@@ -88,7 +88,7 @@ $custom-theme: mat.m2-define-light-theme((
 // ------------------------- GREEN THEME -------------------------
 $green-primary: mat.m2-define-palette(mat.$m2-green-palette, 700);
 $green-accent: mat.m2-define-palette(mat.$m2-teal-palette, A200);
-$green-warn: mat.m2-define-palette($custom-red-palette, 500);
+$green-warn: mat.m2-define-palette(mat.$m2-red-palette, 500);
 
 $green-theme: mat.m2-define-light-theme((
   color: (
@@ -103,7 +103,7 @@ $green-theme: mat.m2-define-light-theme((
 // ------------------------- DARK THEME -------------------------
 $dark-primary: mat.m2-define-palette(mat.$m2-light-blue-palette, 200);
 $dark-accent: mat.m2-define-palette(mat.$m2-cyan-palette, A200);
-$dark-warn: mat.m2-define-palette($custom-red-palette, 500);
+$dark-warn: mat.m2-define-palette(mat.$m2-red-palette, 500);
 
 $dark-theme: mat.m2-define-dark-theme((
   color: (
@@ -129,6 +129,7 @@ $dark-theme: mat.m2-define-dark-theme((
 
 .theme-default {
   --primary-color: #1976d2;
+  --primary-color-rgb: 25, 118, 210;
   --primary-light: #42a5f5;
   --primary-dark: #0d47a1;
   --accent-color: #3f51b5;
@@ -140,6 +141,7 @@ $dark-theme: mat.m2-define-dark-theme((
 
 .theme-green {
   --primary-color: #388e3c;
+  --primary-color-rgb: 56, 142, 60;
   --primary-light: #66bb6a;
   --primary-dark:  #2e7d32;
   --accent-color: #009688;
@@ -151,6 +153,7 @@ $dark-theme: mat.m2-define-dark-theme((
 
 .theme-dark {
   --primary-color: #90caf9;
+  --primary-color-rgb: 144, 202, 249;
   --primary-light: #e3f2fd;
   --primary-dark: #42a5f5;
   --accent-color: #00bcd4;

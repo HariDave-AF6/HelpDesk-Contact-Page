@@ -1,0 +1,85 @@
+<div class="departments-container">
+
+  <!-- Header -->
+  <div class="departments-header">
+    <div class="header-left">
+      <h1 class="page-title">Departments</h1>
+      <p class="page-subtitle">Manage Departments for all properties</p>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" class="add-department-btn">
+        <mat-icon>add</mat-icon>
+        <span>Add Department</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-fields">
+    <mat-form-field appearance="outline" class="search-field">
+      <input matInput placeholder="Search by name..." />
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <!-- Table -->
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" class="department-table" matSort>
+
+      <!-- Department Name -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell *matCellDef="let dept">{{ dept.name }}</mat-cell>
+      </ng-container>
+
+      <!-- Members -->
+      <ng-container matColumnDef="members">
+        <mat-header-cell *matHeaderCellDef> Members </mat-header-cell>
+        <mat-cell *matCellDef="let dept">
+          <div class="avatar-stack-wrapper" (click)="viewAllAgents(dept.id)">
+            <div class="avatar-stack">
+              <ng-container *ngFor="let member of dept.members.slice(0, 4); let i = index">
+                <div class="avatar" [matTooltip]="member.name" [ngStyle]="{ zIndex: 10 - i }">
+                  {{ getInitials(member.name) }}
+                </div>
+              </ng-container>
+              <span *ngIf="dept.members.length > 4" class="more-count">
+                +{{ dept.members.length - 4 }}
+              </span>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+
+      <!-- Active Chats -->
+      <ng-container matColumnDef="chats">
+        <mat-header-cell *matHeaderCellDef>Active Chats</mat-header-cell>
+        <mat-cell *matCellDef="let dept">{{ dept.activeChats }}</mat-cell>
+      </ng-container>
+
+
+  <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let dept">
+          <button  class="mat-icon-button edit-btn" (click)="editDepartment(dept)">
+            <mat-icon color="primary" mat-icon-button>edit</mat-icon>
+          </button>
+          <button  class="mat-icon-button" (click)="deleteDepartment(dept)">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Table Rows -->
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons style="margin-top: 1rem;"></mat-paginator>
+</div>

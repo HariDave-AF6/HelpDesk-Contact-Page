@@ -2,11 +2,13 @@
   <div class="profile-header">
     <div class="header-left">
       <h1 class="page-title">Profile</h1>
-      <p class="page-subtitle">Manage your account information and preferences</p>
+      <p class="page-subtitle">
+        Manage your account information and preferences
+      </p>
     </div>
   </div>
 
-  <mat-tab-group class="profile-tabs">
+  <mat-tab-group class="profile-tabs" mat-align-tabs="start">
     <!-- Profile Tab -->
     <mat-tab>
       <ng-template mat-tab-label>
@@ -16,46 +18,103 @@
 
       <div class="tab-content">
         <mat-card class="section-card">
-          <div class="profile-info">
-            <div class="avatar-upload">
-              <img src="https://via.placeholder.com/100" alt="Avatar" class="avatar-img" />
-              <input type="file" id="avatarInput" hidden>
-              <label for="avatarInput" class="upload-btn">
-                <mat-icon>photo_camera</mat-icon>
-              </label>
-            </div>
+          <mat-card-content>
+            <div class="profile-info">
+              <div class="avatar-section">
+                <div class="avatar-container">
+                  <div class="avatar-wrapper">
+                    @if(profileData.avatar) {
+                    <img
+                      [src]="profileData.avatar"
+                      alt="Profile Avatar"
+                      class="avatar-img"
+                    />
+                    } @else {
+                    <div class="avatar-initials">{{ getInitials() }}</div>
+                    }
+                  </div>
+                  <input
+                    type="file"
+                    id="avatarInput"
+                    accept="image/*"
+                    (change)="onAvatarChange($event)"
+                    hidden
+                  />
+                  <label for="avatarInput" class="camera-btn">
+                    <mat-icon>photo_camera</mat-icon>
+                  </label>
+                </div>
+                <div class="user-info">
+                  <h3>
+                    {{ profileData.firstName }} {{ profileData.lastName }}
+                  </h3>
+                  <p class="user-email">{{ profileData.email }}</p>
+                  <span class="user-role">{{ profileData.role }}</span>
+                </div>
+              </div>
 
-            <div class="info-form">
-              <mat-form-field appearance="fill">
-                <mat-label>First Name</mat-label>
-                <input matInput placeholder="John">
-              </mat-form-field>
+              <div class="form-section">
+                <div class="form-row">
+                  <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input
+                      matInput
+                      [(ngModel)]="profileData.firstName"
+                      placeholder="John"
+                    />
+                  </mat-form-field>
 
-              <mat-form-field appearance="fill">
-                <mat-label>Last Name</mat-label>
-                <input matInput placeholder="Doe">
-              </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input
+                      matInput
+                      [(ngModel)]="profileData.lastName"
+                      placeholder="Doe"
+                    />
+                  </mat-form-field>
+                </div>
 
-              <mat-form-field appearance="fill" class="full-width">
-                <mat-label>Email</mat-label>
-                <input matInput placeholder="john.doe@company.com">
-              </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Email</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="profileData.email"
+                    placeholder="john.doe@company.com"
+                  />
+                </mat-form-field>
 
-              <mat-form-field appearance="fill">
-                <mat-label>Phone</mat-label>
-                <input matInput placeholder="+91 8545328976">
-              </mat-form-field>
+                <div class="form-row">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input
+                      matInput
+                      [(ngModel)]="profileData.phone"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </mat-form-field>
 
-              <mat-form-field appearance="fill">
-                <mat-label>Department</mat-label>
-                <input matInput placeholder="Customer Support">
-              </mat-form-field>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Department</mat-label>
+                    <input
+                      matInput
+                      [(ngModel)]="profileData.department"
+                      placeholder="Customer Support"
+                    />
+                  </mat-form-field>
+                </div>
 
-              <div class="form-actions">
-                <button matButton="elevated" color="primary">Save Changes</button>
+                <div class="form-actions">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="saveProfile()"
+                  >
+                    Save Changes
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </mat-card-content>
         </mat-card>
       </div>
     </mat-tab>
@@ -69,44 +128,75 @@
 
       <div class="tab-content">
         <mat-card class="section-card">
-          <h3>Password</h3>
-          <div class="security-form">
-            <mat-form-field appearance="fill" class="full-width">
-              <mat-label>Current Password</mat-label>
-              <input matInput type="password">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="full-width">
-              <mat-label>New Password</mat-label>
-              <input matInput type="password">
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="full-width">
-              <mat-label>Confirm New Password</mat-label>
-              <input matInput type="password">
-            </mat-form-field>
-            <div class="form-actions">
-              <button mat-raised-button color="primary">Update Password</button>
-            </div>
-          </div>
+          <mat-card-content>
+            <div class="security-section">
+              <h3>Password</h3>
+              <div class="password-form">
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Current Password</mat-label>
+                  <input matInput type="password" />
+                  <mat-icon matSuffix>visibility</mat-icon>
+                </mat-form-field>
 
-          <h3>Two-Factor Authentication</h3>
-          <div class="two-factor">
-            <mat-card class="option-card">
-              <mat-icon>security</mat-icon>
-              <div>
-                <p>TOTP Authenticator</p>
-                <span>Use Google Authenticator for 2FA</span>
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>New Password</mat-label>
+                  <input matInput type="password" />
+                  <mat-icon matSuffix>visibility</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="full-width">
+                  <mat-label>Confirm New Password</mat-label>
+                  <input matInput type="password" />
+                  <mat-icon matSuffix>visibility</mat-icon>
+                </mat-form-field>
+
+                <div class="form-actions">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    (click)="updatePassword()"
+                  >
+                    Update Password
+                  </button>
+                </div>
               </div>
-              <button mat-stroked-button color="primary">Enable</button>
-            </mat-card>
-            <mat-card class="option-card">
-              <mat-icon>fingerprint</mat-icon>
-              <div>
-                <p>Passkeys</p>
-                <span>Use biometric login</span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="section-card">
+          <mat-card-content>
+            <div class="security-section">
+              <h3>Two-Factor Authentication</h3>
+              <p class="section-description">
+                Add an extra layer of security to your account
+              </p>
+
+              <div class="two-factor-options">
+                @for(option of twoFactorOptions; track option) {
+                <div class="option-card" [class.enabled]="option.enabled">
+                  <div class="option-content">
+                    <div class="option-icon">
+                      <mat-icon>{{ option.icon }}</mat-icon>
+                    </div>
+                    <div class="option-info">
+                      <h4>{{ option.title }}</h4>
+                      <p>{{ option.description }}</p>
+                    </div>
+                  </div>
+                  <div class="option-actions">
+                    <mat-slide-toggle
+                      [checked]="option.enabled"
+                      (change)="toggle2FA(option.id)"
+                      color="primary"
+                    >
+                    </mat-slide-toggle>
+                  </div>
+                </div>
+                }
               </div>
-              <button mat-stroked-button color="primary">Setup</button>
-            </mat-card>
-          </div>
+            </div>
+          </mat-card-content>
         </mat-card>
       </div>
     </mat-tab>
@@ -119,53 +209,96 @@
       </ng-template>
 
       <div class="tab-content settings-tab">
-        <div class="settings-sidebar">
-          <button mat-button (click)="activeSetting = 'appearance'" [class.active]="activeSetting === 'appearance'">
-            <mat-icon>palette</mat-icon>
-            Appearance
-          </button>
-          <button mat-button (click)="activeSetting = 'notifications'" [class.active]="activeSetting === 'notifications'">
-            <mat-icon>notifications</mat-icon>
-            Notifications
-          </button>
-          <button mat-button (click)="activeSetting = 'privacy'" [class.active]="activeSetting === 'privacy'">
-            <mat-icon>security</mat-icon>
-            Privacy
-          </button>
-          <button mat-button (click)="activeSetting = 'integrations'" [class.active]="activeSetting === 'integrations'">
-            <mat-icon>extension</mat-icon>
-            Integrations
-          </button>
-        </div>
+        <div class="settings-layout">
+          <div class="settings-sidebar">
+            <mat-nav-list>
+              <mat-list-item
+                (click)="setActiveSetting('appearance')"
+                [class.active]="activeSetting === 'appearance'"
+              >
+                <mat-icon matListIcon>palette</mat-icon>
+                <span matLine>Appearance</span>
+              </mat-list-item>
 
-        <div class="settings-content">
-          <ng-container [ngSwitch]="activeSetting">
-            <div *ngSwitchCase="'appearance'">
-              <h3>Appearance</h3>
-              <p>Select your preferred theme color:</p>
-              <div class="theme-options">
-                <button class="color-option blue"></button>
-                <button class="color-option green"></button>
-                <button class="color-option purple"></button>
-                <button class="color-option orange"></button>
-              </div>
-            </div>
-            <div *ngSwitchCase="'notifications'">
-              <h3>Notifications</h3>
-              <p>Manage your email and push notifications.</p>
-            </div>
-            <div *ngSwitchCase="'privacy'">
-              <h3>Privacy</h3>
-              <p>Control your account privacy settings.</p>
-            </div>
-            <div *ngSwitchCase="'integrations'">
-              <h3>Integrations</h3>
-              <p>Manage connected apps and services.</p>
-            </div>
-          </ng-container>
+              <mat-list-item
+                (click)="setActiveSetting('notifications')"
+                [class.active]="activeSetting === 'notifications'"
+              >
+                <mat-icon matListIcon>notifications</mat-icon>
+                <span matLine>Notifications</span>
+              </mat-list-item>
+            </mat-nav-list>
+          </div>
+
+          <div class="settings-content">
+            <mat-card class="section-card">
+              <mat-card-content>
+                @switch (activeSetting) {
+                  @case ('appearance') {
+                    <div class="settings-section">
+                      <h3>Appearance</h3>
+                      <p class="section-description">
+                        Customize your interface theme and appearance
+                      </p>
+
+                      <div class="theme-section">
+                        <h4>Theme Color</h4>
+                        <div class="theme-options">
+                          <div
+                            class="color-option blue"
+                            (click)="switchTheme('theme-default')"
+                            matTooltip="Default Blue"
+                          >
+                          </div>
+                          <div
+                            class="color-option green"
+                            (click)="switchTheme('theme-green')"
+                            matTooltip="Green Theme"
+                          >
+                          </div>
+                          <div
+                            class="color-option dark"
+                            (click)="switchTheme('theme-dark')"
+                            matTooltip="Dark Theme"
+                          >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  @case ('notifications') {
+                    <div class="settings-section">
+                      <h3>Notifications</h3>
+                      <p class="section-description">
+                        Manage your email and push notifications
+                      </p>
+
+                      <div class="notification-options">
+                        <mat-list>
+                          <mat-list-item>
+                            <div class="option-title">Email Notifications</div>
+                            <div class="option-info">
+                              <div>Receive updates via email</div>
+                              <mat-slide-toggle color="primary"></mat-slide-toggle>
+                            </div>
+                          </mat-list-item>
+                          <mat-list-item>
+                            <div class="option-title">Push Notifications</div>
+                            <div class="option-info">
+                              <div>Receive browser notifications</div>
+                              <mat-slide-toggle color="primary"></mat-slide-toggle>
+                            </div>
+                          </mat-list-item>
+                        </mat-list>
+                      </div>
+                    </div>
+                  }
+                }
+              </mat-card-content>
+            </mat-card>
+          </div>
         </div>
       </div>
     </mat-tab>
   </mat-tab-group>
 </div>
-

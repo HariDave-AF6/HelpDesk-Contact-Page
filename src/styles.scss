@@ -56,3 +56,8 @@ html, body {
 .mat-mdc-paginator-range-label {
   margin: 0 16px 0 16px !important;
 }
+
+// Table Customizations
+.mat-mdc-table {
+  background-color: var(--surface-color) !important;
+}

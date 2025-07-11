@@ -1,0 +1,126 @@
+<div class="agents-container">
+  <!-- Header -->
+  <div class="agents-header">
+    <div class="header-left">
+      <h1 class="page-title">Agents</h1>
+      <p class="page-subtitle">
+        Manage agents for all projects
+      </p>
+    </div>
+    <div class="header-actions">
+      <button matButton="outlined" color="primary" class="action-btn">
+        <mat-icon>file_download</mat-icon>
+        Import
+      </button>
+      <button matButton="outlined" color="primary" class="action-btn">
+        <mat-icon>file_upload</mat-icon>
+        Export
+      </button>
+      <button matButton="elevated" color="primary" class="add-agent-btn">
+        <mat-icon>add</mat-icon>
+        <span>Add Agent</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Search and Tabs -->
+  <div class="search-tabs-section">
+    <mat-form-field appearance="outline" class="search-field">
+      <input matInput placeholder="Search agents..." (keyup)="applyFilter($event)" #searchInput />
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <mat-tab-group class="agents-tabs" [ngClass]="{ 'inactive-tab-selected': selectedTab === 1 }" (selectedTabChange)="onTabChange($event.index)">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>check_circle</mat-icon>
+          <span class="tab-label">Active</span>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>remove_circle</mat-icon>
+          <span class="tab-label">Inactive</span>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <!-- Agents Table -->
+  <div class="table-container">
+    <mat-table [dataSource]="dataSource" class="agents-table" matSort>
+      <!-- Avatar and Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="name">
+          Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let agent" class="agent-cell">
+          <div class="agent-info">
+            <div class="agent-avatar">
+              <mat-icon>account_circle</mat-icon>
+            </div>
+            <div class="agent-details">
+              <div class="agent-name">{{agent.name}}</div>
+              <div class="agent-email">{{agent.email}}</div>
+            </div>
+          </div>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Project Column -->
+      <ng-container matColumnDef="project">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="project">
+          Project
+        </mat-header-cell>
+        <mat-cell *matCellDef="let agent">{{agent.project}}</mat-cell>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="phone">Phone</mat-header-cell>
+        <mat-cell *matCellDef="let agent">
+          <a href="tel:{{agent.phone}}" class="phone-link">{{agent.phone}}</a>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Department Column -->
+      <ng-container matColumnDef="department">
+        <mat-header-cell *matHeaderCellDef mat-sort-header="department">
+          Department
+        </mat-header-cell>
+        <mat-cell *matCellDef="let agent">{{agent.department}}</mat-cell>
+      </ng-container>
+
+      <!-- Last Seen Column -->
+      @if(selectedTab == 1) {
+        <ng-container matColumnDef="lastSeen">
+          <mat-header-cell *matHeaderCellDef>Last Seen</mat-header-cell>
+          <mat-cell *matCellDef="let agent">
+            <span class="last-seen">{{agent.lastSeen}}</span>
+          </mat-cell>
+        </ng-container>
+      }
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+        <mat-cell *matCellDef="let agent">
+          <button class="edit-action mat-icon-button" style="margin-right: 10px">
+            <mat-icon color="primary">edit</mat-icon>
+          </button>
+          <button class="delete-action mat-icon-button">
+            <mat-icon color="warn">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: displayedColumns;"
+        class="table-row"
+      ></mat-row>
+    </mat-table>
+  </div>
+
+  <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons style="margin-top: 1rem;"></mat-paginator>
+</div>

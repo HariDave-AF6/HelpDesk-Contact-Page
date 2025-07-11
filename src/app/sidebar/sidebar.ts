@@ -3,7 +3,6 @@ import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
-import { ThemeService } from '../services/theme-service';
 
 interface MenuItem {
   icon: string;
@@ -45,12 +44,8 @@ export class Sidebar {
     { icon: 'settings', label: 'Settings', route: '/settings' }
   ];
 
-  constructor(private themeService: ThemeService) {
+  constructor() {
     this.updateMenuItems();
-  }
-
-  switchTheme(theme: 'theme-default' | 'theme-green' | 'theme-dark') {
-    this.themeService.setTheme(theme);
   }
 
   ngOnChanges(changes: SimpleChanges) {

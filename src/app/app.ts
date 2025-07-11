@@ -7,13 +7,12 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [Sidebar, Navbar, MatDrawerContainer, MatDrawer, MatDrawerContent, ChatSidebar, RouterOutlet],
+  imports: [RouterOutlet, Sidebar, Navbar, MatDrawerContainer, MatDrawer, MatDrawerContent, ChatSidebar],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 
 export class App {
-  protected title = 'contacts';
   selectedProject: string = 'all';
   @ViewChild('drawer') drawer!: MatDrawer;
   @ViewChild('rightDrawer') rightDrawer!: MatDrawer;

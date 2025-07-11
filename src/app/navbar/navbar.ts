@@ -17,7 +17,6 @@ import { Subscription } from 'rxjs';
 })
 
 export class Navbar {
-  searchQuery: string = '';
   notificationCount: number = 3;
   chatCount: number = 2;
   selectedProject: string = 'all';

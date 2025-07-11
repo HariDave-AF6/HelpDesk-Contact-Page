@@ -1,10 +1,10 @@
-.contacts-container {
+.agents-container {
   max-width: 100%;
   background-color: var(--background-color);
 }
 
 // Header Section
-.contacts-header {
+.agents-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -59,7 +59,7 @@
   }
 }
 
-.add-contact-btn {
+.add-agent-btn {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -87,11 +87,54 @@
   }
 }
 
-.contacts-tabs {
+.agents-tabs {
   flex-shrink: 0;
   min-width: 35%;
   margin: 0 0 22px auto;
 }
+
+// Styling for inactive tab when active - including ripple effect
+// ::ng-deep .agents-tabs.inactive-tab-selected {
+//   .mat-mdc-tab-header {
+//     .mdc-tab-indicator {
+//       .mdc-tab-indicator__content--underline {
+//         border-color: #f44336 !important;
+//         background-color: #f44336 !important;
+//       }
+//     }
+//   }
+
+//   .mdc-tab--active {
+//     .mdc-tab__content {
+//       .mdc-tab__text-label {
+//         color: #f44336 !important;
+//       }
+
+//       .mat-icon {
+//         color: #f44336 !important;
+//       }
+//     }
+
+//     // Ripple effect color
+//     .mat-ripple-element {
+//       background-color: rgba(244, 67, 54, 0.1) !important;
+//     }
+
+//     // Focus and hover states
+//     &:focus,
+//     &:hover {
+//       .mdc-tab__text-label,
+//       .mat-icon {
+//         color: #d32f2f !important; // Darker red
+//       }
+
+//       // Ripple on hover/focus
+//       .mat-ripple-element {
+//         background-color: rgba(244, 67, 54, 0.15) !important;
+//       }
+//     }
+//   }
+// }
 
 .search-field {
   flex: 1;
@@ -121,15 +164,15 @@
   border: 1px solid var(--border-color);
 }
 
-// Contact Cell
-.contact-cell {
-  .contact-info {
+// Agent Cell
+.agent-cell {
+  .agent-info {
     display: flex;
     align-items: center;
     gap: 12px;
   }
 
-  .contact-avatar {
+  .agent-avatar {
     mat-icon {
       font-size: 40px;
       width: 40px;
@@ -139,15 +182,15 @@
     }
   }
 
-  .contact-details {
-    .contact-name {
+  .agent-details {
+    .agent-name {
       font-weight: 600;
       color: var(--text-primary);
       line-height: 1.3;
       margin-bottom: 2px;
     }
 
-    .contact-email {
+    .agent-email {
       font-size: 13px;
       color: var(--text-secondary);
       line-height: 1.3;
@@ -167,21 +210,19 @@
   }
 }
 
-// Last Contact
-.last-contact {
+// Last Seen
+.last-seen {
   font-size: 13px;
   color: var(--text-secondary);
 }
 
 // Responsive Design
 @media (max-width: 1279.98px) {
-  .contacts-header {
-    flex-direction: column;
+  .agents-header {
     gap: 20px;
     align-items: flex-start;
 
     .header-actions {
-      width: 100%;
       justify-content: flex-start;
       flex-wrap: wrap;
     }
@@ -197,17 +238,21 @@
     font-size: 14px;
   }
 
-  .contacts-tabs {
+  .agents-tabs {
     ::ng-deep .mat-tab-label {
       padding: 12px 16px;
       font-size: 13px;
     }
   }
 
-  .contacts-header .header-actions {
-    width: 100%;
-    justify-content: flex-end;
-    flex-wrap: wrap;
+  .agents-header {
+    flex-direction: column;
+
+    .header-actions {
+      width: 100%;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+    }
   }
 }
 
@@ -222,7 +267,7 @@
     }
   }
 
-  .contacts-tabs {
+  .agents-tabs {
     flex-shrink: 0;
     width: 100%;
     margin: 0 0 20px auto;
@@ -232,7 +277,11 @@
     padding: 0 10px !important;
   }
 
-  ::ng-deep .mat-mdc-raised-button{
+  ::ng-deep .mat-mdc-outlined-button {
+    padding: 0 10px !important;
+  }
+
+  ::ng-deep .mat-mdc-raised-button {
     padding: 0 !important;
     min-width: 36px !important;
 
@@ -256,8 +305,16 @@
 }
 
 // Search & Select Customization
-:host ::ng-deep .search-field .mdc-text-field--outlined .mat-mdc-form-field-infix,
-:host ::ng-deep .search-field .mdc-text-field--no-label .mat-mdc-form-field-infix {
+:host
+  ::ng-deep
+  .search-field
+  .mdc-text-field--outlined
+  .mat-mdc-form-field-infix,
+:host
+  ::ng-deep
+  .search-field
+  .mdc-text-field--no-label
+  .mat-mdc-form-field-infix {
   padding-top: 10px !important;
   padding-bottom: 10px !important;
 }
@@ -268,8 +325,16 @@
   padding-bottom: 0 !important;
 }
 
-:host ::ng-deep .search-field .mdc-text-field--no-label:not(.mdc-text-field--textarea) .mat-mdc-form-field-input-control.mdc-text-field__input,
-:host ::ng-deep .search-field .mat-mdc-text-field-wrapper .mat-mdc-form-field-input-control {
+:host
+  ::ng-deep
+  .search-field
+  .mdc-text-field--no-label:not(.mdc-text-field--textarea)
+  .mat-mdc-form-field-input-control.mdc-text-field__input,
+:host
+  ::ng-deep
+  .search-field
+  .mat-mdc-text-field-wrapper
+  .mat-mdc-form-field-input-control {
   margin-top: 3px;
 }
 
@@ -289,7 +354,7 @@
   min-width: 120px;
 }
 
-.mat-column-organization {
+.mat-column-department {
   min-width: 140px;
 }
 
@@ -304,7 +369,7 @@
 .table-container {
   overflow-x: auto;
 
-  .contacts-table {
+  .agents-table {
     min-width: 100%;
     border-collapse: collapse;
 
@@ -323,6 +388,6 @@ td.mat-column-actions {
   background-color: var(--background-color);
 }
 
-::ng-deep .theme-dark .edit-action mat-icon{
+::ng-deep .theme-dark .edit-action mat-icon {
   color: #455a64;
 }
